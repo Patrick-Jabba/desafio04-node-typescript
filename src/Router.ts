@@ -7,4 +7,4 @@ const userController = new UserController()
 
 router.get('/user', userController.getAllUsers)
 router.post('/user', userController.createUser)
-// router.delete('/user', userController.deleteUser)
+router.delete(`/user/:id`, userController.deleteUser)

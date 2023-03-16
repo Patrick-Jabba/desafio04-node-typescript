@@ -4,6 +4,8 @@ import { UserController } from "./UserController";
 import { Request } from "express";
 import { makeMockResponse } from "../__mocks__/mockResponse";
 
+const mockResponse = makeMockResponse()
+
 describe('UserController', () => {
   const mockUserService: Partial<UserService> = {
     createUser: jest.fn(),
@@ -19,8 +21,6 @@ describe('UserController', () => {
         email: 'nath@email.com'
       }
     } as Request
-
-    const mockResponse = makeMockResponse()
     
     userController.createUser(mockRequest, mockResponse)
     
@@ -38,8 +38,6 @@ describe('UserController', () => {
       }
     } as Request
 
-    const mockResponse = makeMockResponse()
-    
     userController.createUser(mockRequest, mockResponse)
     
     expect(mockResponse.state.status).toBe(400)
@@ -51,7 +49,26 @@ describe('UserController', () => {
   it('should bring all users when requested', () => {
     const mockRequest = {
     } as Request
-    const mockResponse = makeMockResponse()
+
     userController.getAllUsers(mockRequest, mockResponse)
   })
+
+  it('should show an error when the email field is not informed', () => {
+    const mockRequest = {
+      body: {
+        name: 'Moreira Castro',
+      email: ''
+      }
+    } as Request
+
+    userController.createUser(mockRequest, mockResponse)
+
+    expect(mockResponse.state.status).toBe(400)
+    expect(mockResponse.state.json).toMatchObject({
+      message:
+      'Bad request! E-mail obrigatório!'
+    })
+  })
+
+  
 })

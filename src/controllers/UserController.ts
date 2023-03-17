@@ -12,26 +12,25 @@ export class UserController {
     
     const user = request.body
 
-    if(!user.name) {
-      return response.status(400).json({message: 'Bad request! Nome obrigatório!'})
-    }
-
-    if(!user.email) {
-      return response.status(400).json({
-        message: 'Bad request! E-mail obrigatório!'
-      })
+    if(!user.name || !user.email || !user.password) {
+      return response.status(400).json({message: 'Bad request! Todos os campos são obrigatórios!'})
     }
     
-    this.userService.createUser(user.id, user.name, user.email)
+    this.userService.createUser(user.name, user.email, user.password)
     return response.status(201).json({
       message: 'Usuário criado'
     });
   }
 
-  getAllUsers = (request: Request, response: Response) => {
-    const users = this.userService.getAllUsers()
-
-    return response.status(200).json(users)
+  getUserById = async (request: Request, response: Response) => {
+    const { userId } = request.params
+    const user  = await this.userService.getUserById(userId)
+    
+    return response.status(200).json({
+      userId: user?.user_id,
+      name: user?.name,
+      email: user?.email
+    })
   }
 
   deleteUser = (request: Request, response: Response) => {

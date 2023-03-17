@@ -37,8 +37,14 @@ export class UserController {
   deleteUser = (request: Request, response: Response) => {
     const { id } = request.params
 
+    if(id === null) {
+      console.log('Bad Request! Usuário não achado.')
+      return;
+    }
+
     this.userService.deleteUser(id)
-    console.log(id)
-    return response.status(204)
+    return response.status(204).json({
+      message: 'Usuário removido com sucesso!'
+    })
   }
 }

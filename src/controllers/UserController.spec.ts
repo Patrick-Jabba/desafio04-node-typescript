@@ -71,14 +71,19 @@ describe('UserController', () => {
     })
   })
 
-  // it('should delete an user', () => {
-  //   const mockRequest = {
-  //     "1": Params,
-  //   } as Request
+  it('should delete an user', () => {
+    const mockRequest = {
+      params: {
+        
+      }
+    } as Request
 
-  //   userController.deleteUser(MockRequest, mockResponse)
-  //   expect(mockResponse.state.status).toBe(200)
-  // })
+    userController.deleteUser(mockRequest, mockResponse)
+    expect(mockResponse.state.status).toBe(204)
+    expect(mockResponse.state.json).toMatchObject({
+      message: 'Usuário removido com sucesso!'
+    })
+  })
 
   
 })

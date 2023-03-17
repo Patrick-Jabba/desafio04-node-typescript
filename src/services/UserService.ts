@@ -31,11 +31,6 @@ export class UserService {
   }
 
   deleteUser = (id: string) => {
-    if(id === null) {
-      console.log('Bad Request! Usuário não achado.')
-      return;
-    }
-
     this.db = this.db.filter(user => user.id != id )
     
     console.log('DB atualizado', this.db)

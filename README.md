@@ -27,7 +27,7 @@ npm run dev
 - O usuário nâo pode ser criado caso não informe o email
 - Escreva o teste unitário
 
-## [ ] Refatorar e implementar a rota para deletar o usuário
+## [ ✅ ] Refatorar e implementar a rota para deletar o usuário
 
 - Refatore a rota para deletar usuários
 - Escreva os testes unitários necessários
